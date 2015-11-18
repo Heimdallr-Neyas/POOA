@@ -19,10 +19,13 @@ public class Paint {
 	private JButton clearButton;
 	private JButton circleButton;
 	private JButton rectangleButton;
+	private JButton groupButton;
+	private JButton degroupButton;
 	private JPanel buttonPanel;
 	private JPanel mainPanel;
 	private JPanel infoPanel;
 	private Box PanelBas;
+	private Box PanelGroup;
 	private Drawing drawing;
 	private JTextField texte;
 	
@@ -31,18 +34,23 @@ public class Paint {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainPanel = new JPanel(new BorderLayout());
 		PanelBas = Box.createVerticalBox();
-		
+		PanelGroup = Box.createHorizontalBox();
 				
 		drawing = new Drawing();
 		drawing.setBackground(Color.WHITE);
 		clearButton = new JButton("Clear");
 		circleButton = new JButton("Circle");
 		rectangleButton = new JButton("Rectangle");
+		groupButton = new JButton("Group");
+		degroupButton = new JButton("Degroup");
 		
 		buttonPanel = new JPanel();
 		buttonPanel.add(clearButton);
 		buttonPanel.add(circleButton);
 		buttonPanel.add(rectangleButton);
+		
+		PanelGroup.add(groupButton);
+		PanelGroup.add(degroupButton);
 		
 		texte = new JTextField("0");
 		
@@ -54,6 +62,7 @@ public class Paint {
 		
 		PanelBas.add(buttonPanel);
 		PanelBas.add(infoPanel);
+		PanelBas.add(PanelGroup);
 		
 		texte.addActionListener(new CounterTextListener(texte, drawing));
 //		clearButton.addActionListener(new ClearButtonListener(drawing));
@@ -63,6 +72,8 @@ public class Paint {
 		clearButton.addActionListener(new ClearButtonListener(drawing));
 		circleButton.addActionListener(new CircleButtonListener(drawing));
 		rectangleButton.addActionListener(new RectangleButtonListener(drawing));
+		groupButton.addActionListener(new GroupButtonListener(drawing));
+		degroupButton.addActionListener(new DegroupButtonListener(drawing));
 		
 		//listeners pour la zone de dessin
 		DrawingMouseListener l = new DrawingMouseListener(drawing, texte);

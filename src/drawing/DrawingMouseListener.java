@@ -41,10 +41,6 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 		}
 	}
 	
-	
-	
-	
-
 	/**
 	 * D�s�lectionne la forme
 	 */
