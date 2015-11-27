@@ -3,9 +3,9 @@ package drawing;
 import java.awt.Color;
 import java.awt.Point;
 
-public class CircleButtonListener extends ShapeButtonListener {
+public class CommandCircleButton extends ShapeButtonListener {
 	
-	public CircleButtonListener(Drawing drawing){
+	public CommandCircleButton(Drawing drawing){
 		super(drawing);
 	}
 	
@@ -19,5 +19,9 @@ public class CircleButtonListener extends ShapeButtonListener {
 		Point center = new Point((int)centerX, (int)centerY);
 		Circle c = new Circle(center, radius, Color.RED);
 		return c;
+	}
+	
+	public String name(){
+		return "Cercle";
 	}
 }

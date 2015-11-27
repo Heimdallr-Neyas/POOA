@@ -22,12 +22,15 @@ public class Paint {
 	private JButton groupButton;
 	private JButton degroupButton;
 	private JButton duplicateButton;
+	private JButton UndoButton;
+	private JButton RedoButton;
 	private JPanel buttonPanel;
 	private JPanel mainPanel;
 	private JPanel infoPanel;
 	private Box PanelBas;
 	private Box PanelGroup;
 	private Box PanelDuplicate;
+	private Box PanelRedo;
 	private Drawing drawing;
 	private JTextField texte;
 	
@@ -38,15 +41,20 @@ public class Paint {
 		PanelBas = Box.createVerticalBox();
 		PanelGroup = Box.createHorizontalBox();
 		PanelDuplicate = Box.createHorizontalBox();
-				
+		PanelRedo = Box.createHorizontalBox();	
+		
 		drawing = new Drawing();
 		drawing.setBackground(Color.WHITE);
+		
+		
 		clearButton = new JButton("Clear");
 		circleButton = new JButton("Circle");
 		rectangleButton = new JButton("Rectangle");
 		groupButton = new JButton("Group");
 		degroupButton = new JButton("Degroup");
 		duplicateButton = new JButton("Duplicate");
+		UndoButton = new JButton("Undo");
+		RedoButton = new JButton("Redo");
 		
 		buttonPanel = new JPanel();
 		buttonPanel.add(clearButton);
@@ -58,7 +66,10 @@ public class Paint {
 		
 		PanelDuplicate.add(duplicateButton);
 		
-		texte = new JTextField("0");
+		PanelRedo.add(UndoButton);
+		PanelRedo.add(RedoButton);
+		
+		texte = new JTextField(drawing.getNumber());
 		
 		mainPanel.add(PanelBas, BorderLayout.SOUTH);
 		mainPanel.add(drawing, BorderLayout.CENTER);
@@ -70,17 +81,23 @@ public class Paint {
 		PanelBas.add(infoPanel);
 		PanelBas.add(PanelGroup);
 		PanelBas.add(PanelDuplicate);
+		PanelBas.add(PanelRedo);
 		
 		texte.addActionListener(new CounterTextListener(texte, drawing));
 		
 		
 		//listeners pour les boutons
-		clearButton.addActionListener(new ClearButtonListener(drawing));
-		circleButton.addActionListener(new CircleButtonListener(drawing));
-		rectangleButton.addActionListener(new RectangleButtonListener(drawing));
-		groupButton.addActionListener(new GroupButtonListener(drawing));
-		degroupButton.addActionListener(new DegroupButtonListener(drawing));
-		duplicateButton.addActionListener(new DuplicateButtonListener(drawing));
+		//clearButton.addActionListener(new ClearButtonListener(drawing));
+		Invoker inv = new Invoker(drawing);
+		
+		clearButton.addActionListener(inv);
+		circleButton.addActionListener(inv);
+		rectangleButton.addActionListener(inv);
+		groupButton.addActionListener(inv);
+		degroupButton.addActionListener(inv);
+		duplicateButton.addActionListener(inv);
+		UndoButton.addActionListener(inv);
+		RedoButton.addActionListener(inv);
 		
 		//listeners pour la zone de dessin
 		DrawingMouseListener l = new DrawingMouseListener(drawing, texte);
