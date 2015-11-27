@@ -12,11 +12,16 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	
 	ArrayList<Shape> shapes;
 	int number;
+	boolean grouped;
+	boolean duplicate;
+	boolean duplicateGroup;
 	
 	public Drawing(){
 		super();
 		number = 0;
 		shapes = new ArrayList<Shape>();
+		grouped = false;
+		duplicate = false;
 	}
 	
 	/**
@@ -56,10 +61,50 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	}
 	
 	/**
-	 * Enl�ve toutes les formes et redessine
+	 * Recup number
 	 */
 	public String getNumber(){
 		return new String(Integer.toString(number));
+	}
+	
+	/**
+	 * Group the shapes 
+	 */
+	public void group(){
+		grouped = true;
+	}
+	
+	/**
+	 * Ungroup the shapes 
+	 */
+	public void degroup(){
+		grouped = false;
+	}
+	
+	public boolean getGrouped(){
+		return grouped;
+	}
+	
+	/**
+	 * Duplicate a Shape
+	 */
+	public void duplicate(){
+		duplicate = true;
+	}
+	
+	public boolean getDuplicate(){
+		return duplicate;
+	}
+	
+	
+	public void razDuplicate(){
+		duplicate = false;
+	}
+	
+	public void cloneShape(Shape s){
+		shapes.add(s.clone());
+		number++;
+		this.repaint();
 	}
 	
 }

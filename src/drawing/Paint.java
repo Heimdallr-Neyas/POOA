@@ -21,11 +21,13 @@ public class Paint {
 	private JButton rectangleButton;
 	private JButton groupButton;
 	private JButton degroupButton;
+	private JButton duplicateButton;
 	private JPanel buttonPanel;
 	private JPanel mainPanel;
 	private JPanel infoPanel;
 	private Box PanelBas;
 	private Box PanelGroup;
+	private Box PanelDuplicate;
 	private Drawing drawing;
 	private JTextField texte;
 	
@@ -35,6 +37,7 @@ public class Paint {
 		mainPanel = new JPanel(new BorderLayout());
 		PanelBas = Box.createVerticalBox();
 		PanelGroup = Box.createHorizontalBox();
+		PanelDuplicate = Box.createHorizontalBox();
 				
 		drawing = new Drawing();
 		drawing.setBackground(Color.WHITE);
@@ -43,6 +46,7 @@ public class Paint {
 		rectangleButton = new JButton("Rectangle");
 		groupButton = new JButton("Group");
 		degroupButton = new JButton("Degroup");
+		duplicateButton = new JButton("Duplicate");
 		
 		buttonPanel = new JPanel();
 		buttonPanel.add(clearButton);
@@ -51,6 +55,8 @@ public class Paint {
 		
 		PanelGroup.add(groupButton);
 		PanelGroup.add(degroupButton);
+		
+		PanelDuplicate.add(duplicateButton);
 		
 		texte = new JTextField("0");
 		
@@ -63,9 +69,9 @@ public class Paint {
 		PanelBas.add(buttonPanel);
 		PanelBas.add(infoPanel);
 		PanelBas.add(PanelGroup);
+		PanelBas.add(PanelDuplicate);
 		
 		texte.addActionListener(new CounterTextListener(texte, drawing));
-//		clearButton.addActionListener(new ClearButtonListener(drawing));
 		
 		
 		//listeners pour les boutons
@@ -74,6 +80,7 @@ public class Paint {
 		rectangleButton.addActionListener(new RectangleButtonListener(drawing));
 		groupButton.addActionListener(new GroupButtonListener(drawing));
 		degroupButton.addActionListener(new DegroupButtonListener(drawing));
+		duplicateButton.addActionListener(new DuplicateButtonListener(drawing));
 		
 		//listeners pour la zone de dessin
 		DrawingMouseListener l = new DrawingMouseListener(drawing, texte);

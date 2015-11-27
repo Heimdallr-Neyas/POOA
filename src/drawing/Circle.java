@@ -28,6 +28,8 @@ public class Circle extends Shape{
 		return this.origin.distance(p);
 	}
 	
-
+	public Shape clone(){
+		return new Circle(this.origin, this.radius, this.color);
+	}
 
 }

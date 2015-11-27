@@ -6,7 +6,7 @@ import java.awt.Point;
 /**
  * Classe abstraite de type forme dessinable.
  */
-public abstract class Shape {
+public abstract class Shape implements GroupInterface{
 	
 	protected Point origin;
 	
@@ -15,13 +15,19 @@ public abstract class Shape {
 		origin = p;
 	}
 	
+	public Point getPoint(){
+		return origin;
+	}
+	
 	/**
 	 * dessine la forme sur un Graphics
 	 */
 	public abstract void paint(Graphics g);
 	
 	/**
-	 * renvoie true si la forme occupe sur le point donnŽ
+	 * renvoie true si la forme occupe sur le point donnï¿½
 	 */
 	public abstract boolean isOn(Point p);
+	
+	public abstract Shape clone();
 }

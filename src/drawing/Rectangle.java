@@ -27,4 +27,8 @@ public class Rectangle extends Shape {
 		g.setColor(Color.BLACK);
 		g.drawRect(origin.x, origin.y, width, height);
 	}
+	
+	public Shape clone(){
+		return new Rectangle(this.origin, this.width, this.height, this.color);
+	}
 }

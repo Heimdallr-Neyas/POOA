@@ -10,14 +10,13 @@ public class CounterTextListener implements ActionListener {
 	JTextField texte;
 	Drawing drawing;
 	public CounterTextListener(JTextField texte, Drawing drawing){
-		System.out.println("1");
+		System.out.println("RAZ compteur");
 		this.texte = texte;
 		this.drawing = drawing;
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
 		texte.setText(drawing.getNumber());
-		System.out.println("Test");
 	}
 
 }
