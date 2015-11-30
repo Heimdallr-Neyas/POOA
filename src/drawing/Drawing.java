@@ -11,6 +11,7 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	private static final long serialVersionUID = 1L;
 	
 	ArrayList<Shape> shapes;
+	ArrayList<Shape> shapesSauv;	
 	int number;
 	boolean grouped;
 	boolean duplicate;
@@ -56,6 +57,7 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	 */
 	public void clear(){
 		number = 0;
+		shapesSauv = shapes;
 		shapes.clear();
 		this.repaint();
 	}
@@ -107,4 +109,23 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 		this.repaint();
 	}
 	
+	public void unClear(){
+		number = shapesSauv.size();
+		shapes = shapesSauv;
+		shapesSauv.clear();
+		this.repaint();
+		
+	}
+	
+	public void unDuplicate(){
+		shapes.remove(number - 1);
+		number --;
+		duplicate = false;
+	}
+	
+	public void unCreate(){
+		shapes.remove(number - 1);
+		number --;
+		duplicate = false;
+	}
 }

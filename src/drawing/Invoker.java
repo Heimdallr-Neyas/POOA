@@ -19,56 +19,75 @@ public class Invoker implements ActionListener{
 	
 	public void actionPerformed(ActionEvent arg0) {
 		
-		
 		switch (arg0.getActionCommand()){
 		  case "Clear":
+			  System.out.println("78945600");
 			  c = new CommandClearButton(_drawing);
+			  System.out.println("741852963");
 			  _history.addElement(c);
+			  System.out.println("123456789");
 			  i = 1;
+			  System.out.println("123456789");
+			  c.execute();
 			  break;        
 		  case "Group":
 			  c = new CommandGroupButton(_drawing);
 			  _history.addElement(c);
 			  i = 1;
+			  c.execute();
 			  break; 
 		  case "Degroup":
 			  c = new CommandDegroupButton(_drawing);
 			  _history.addElement(c);
 			  i = 1;
+			  c.execute();
 			  break; 
 		  case "Duplicate":
 			  c = new CommandDuplicateButton(_drawing);
 			  _history.addElement(c);
 			  i = 1;
+			  c.execute();
 			  break; 
 		  case "Circle":
 			  c = new CommandCircleButton(_drawing);
 			  _history.addElement(c);
 			  i = 1;
+			  c.execute();
 			  break;
 		  case "Rectangle":
 			  c = new CommandRectangleButton(_drawing);
 			  _history.addElement(c);
 			  i = 1;
+			  c.execute();
+			  break; 
+		  case "add Text":
+			  c = new CommandAddTextButton(_drawing );
+			  _history.addElement(c);
+			  i = 1;
+			  c.execute();
 			  break; 
 		  case "Undo":
 			  if(i > _history.size()){
-				  i = 1;
+				  //i = 1;
+				  System.out.println("Plus rien à annuler ");
+			  }else{
+				  c = new CommandUndoButton(_drawing, _history.elementAt(_history.size() - i));
+				  i++;  
+				  c.execute();
 			  }
-			  c = new CommandUndoButton(_drawing, _history.elementAt(_history.size() - i));
-			  i++;
 			  break;
 		  case "Redo":
-			  if(i > _history.size()){
-				  i = 1;
+			  if(i <= 0){
+				  System.out.println("Plus rien à rejouer ");
+			  }else{
+				  c = new CommandRedoButton(_drawing, _history.elementAt(_history.size() - i));
+				  i--;				  
+				  c.execute();
 			  }
-			  c = new CommandRedoButton(_drawing, _history.elementAt(_history.size() - i));
-			  i++;
 			  break; 
 		  default: 
 			  System.out.println("Erreur Patern Command (Invoker.java)");
 		}
 		
-		c.execute();
 	}
 }

@@ -10,6 +10,17 @@ public class Rectangle extends Shape {
 	int height;
 	Color color;
 	
+	public Rectangle(){
+		Point _origin = new Point((int)20, (int)20);
+		int _width = 50;
+		int _height = 50;
+		Color _color = Color.BLUE;
+		this.origin = _origin;
+		this.width = _width;
+		this.height = _height;
+		this.color = _color;
+	}
+	
 	public Rectangle(Point origin, int width, int height, Color color){
 		this.origin = origin;
 		this.width = width;

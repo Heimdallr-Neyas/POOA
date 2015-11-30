@@ -7,6 +7,15 @@ public class Circle extends Shape{
 	
 	private double radius;
 	
+	public Circle(){
+		Point _origin = new Point((int)20, (int)20);
+		double _radius = 50.0;
+		Color _color = Color.RED;
+		this.origin = _origin;
+		this.radius = _radius;
+		this.color = _color;
+	}
+	
 	public Circle(Point origin, double radius, Color color){
 		this.origin = origin;
 		this.radius = radius;

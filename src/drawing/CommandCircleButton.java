@@ -22,6 +22,6 @@ public class CommandCircleButton extends ShapeButtonListener {
 	}
 	
 	public String name(){
-		return "Cercle";
+		return "Circle";
 	}
 }

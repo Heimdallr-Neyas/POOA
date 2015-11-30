@@ -24,6 +24,7 @@ public class Paint {
 	private JButton duplicateButton;
 	private JButton UndoButton;
 	private JButton RedoButton;
+	private JButton addTextButton;
 	private JPanel buttonPanel;
 	private JPanel mainPanel;
 	private JPanel infoPanel;
@@ -31,8 +32,10 @@ public class Paint {
 	private Box PanelGroup;
 	private Box PanelDuplicate;
 	private Box PanelRedo;
+	private Box PanelText;
 	private Drawing drawing;
 	private JTextField texte;
+	private JTextField texteForme;
 	
 	public void run(){
 		frame = new JFrame("Paint");
@@ -41,7 +44,8 @@ public class Paint {
 		PanelBas = Box.createVerticalBox();
 		PanelGroup = Box.createHorizontalBox();
 		PanelDuplicate = Box.createHorizontalBox();
-		PanelRedo = Box.createHorizontalBox();	
+		PanelRedo = Box.createHorizontalBox();
+		PanelText = Box.createHorizontalBox();
 		
 		drawing = new Drawing();
 		drawing.setBackground(Color.WHITE);
@@ -55,6 +59,7 @@ public class Paint {
 		duplicateButton = new JButton("Duplicate");
 		UndoButton = new JButton("Undo");
 		RedoButton = new JButton("Redo");
+		addTextButton = new JButton("add Text");
 		
 		buttonPanel = new JPanel();
 		buttonPanel.add(clearButton);
@@ -69,6 +74,12 @@ public class Paint {
 		PanelRedo.add(UndoButton);
 		PanelRedo.add(RedoButton);
 		
+		texteForme = new JTextField("Saisir le texte");
+
+		PanelText.add(addTextButton);
+		PanelText.add(texteForme);
+		
+		
 		texte = new JTextField(drawing.getNumber());
 		
 		mainPanel.add(PanelBas, BorderLayout.SOUTH);
@@ -82,6 +93,7 @@ public class Paint {
 		PanelBas.add(PanelGroup);
 		PanelBas.add(PanelDuplicate);
 		PanelBas.add(PanelRedo);
+		PanelBas.add(PanelText);
 		
 		texte.addActionListener(new CounterTextListener(texte, drawing));
 		
@@ -98,6 +110,7 @@ public class Paint {
 		duplicateButton.addActionListener(inv);
 		UndoButton.addActionListener(inv);
 		RedoButton.addActionListener(inv);
+		addTextButton.addActionListener(inv);
 		
 		//listeners pour la zone de dessin
 		DrawingMouseListener l = new DrawingMouseListener(drawing, texte);
@@ -107,7 +120,7 @@ public class Paint {
 		
 
 		frame.getContentPane().add(mainPanel);
-		frame.setSize(640,480);
+		frame.setSize(640,580);
 		frame.setVisible(true);
 	}
 	

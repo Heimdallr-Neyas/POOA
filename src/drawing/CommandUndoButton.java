@@ -12,7 +12,7 @@ public class CommandUndoButton implements CommandInterface{
 	public void execute() {
 		switch (c.name()){
 		  case "Clear":
-			  //TODO
+			  drawing.unClear();
 			  break;        
 		  case "Group":
 			  drawing.degroup();
@@ -21,16 +21,19 @@ public class CommandUndoButton implements CommandInterface{
 			  drawing.group();
 			  break; 
 		  case "Duplicate":
-			  drawing.duplicate();
+			  drawing.unDuplicate();
 			  break; 
 		  case "Circle":
-			  
+			  drawing.unCreate();
 			  break;
 		  case "Rectangle":
+			  drawing.unCreate();
 			  break; 
 		  case "Undo":
+			  //Nothing
 			  break;
 		  case "Redo":
+			  //Nothing
 			  break; 
 		  default: 
 			  System.out.println("Erreur Patern Command (Undo)");
