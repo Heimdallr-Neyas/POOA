@@ -61,7 +61,7 @@ public class Invoker implements ActionListener{
 			  c.execute();
 			  break; 
 		  case "add Text":
-			  c = new CommandAddTextButton(_drawing );
+			  c = new CommandAddTextButton(_drawing, "");
 			  _history.addElement(c);
 			  i = 1;
 			  c.execute();
