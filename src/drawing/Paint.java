@@ -17,6 +17,7 @@ public class Paint {
 
 	private JFrame frame;
 	
+	// Les boutons & les compteurs
 	private JButton clearButton;
 	private JButton circleButton;
 	private JButton rectangleButton;
@@ -27,22 +28,22 @@ public class Paint {
 	private JButton RedoButton;
 	private JButton addTextButton;
 	private JLabel counter;
-	
+	private JTextField texte;
+
+	// Panels de mise en forme. 
 	private JPanel mainPanel;
 	private Box buttonPanel;
 	private Box infoPanel;
 	private Box PanelBas;
 	private Box PanelGroup;
 	
+	// Interface de dessin.
 	private Drawing drawing;
-	private JTextField texte;
 	
 	public void run(){
 		frame = new JFrame("Paint");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
-
 		
 		drawing = new Drawing();
 		drawing.setBackground(Color.WHITE);
@@ -58,13 +59,13 @@ public class Paint {
 		UndoButton = new JButton("Undo");
 		RedoButton = new JButton("Redo");
 		addTextButton = new JButton("add Text");
-		
 		counter = new JLabel("Nombre de figures : ");
+		texte = new JTextField(drawing.getNumber());
 		
 		//listeners pour les boutons
-		//clearButton.addActionListener(new ClearButtonListener(drawing));
+			//Invoker du patron Command 
 		Invoker inv = new Invoker(drawing);
-		
+
 		clearButton.addActionListener(inv);
 		circleButton.addActionListener(inv);
 		rectangleButton.addActionListener(inv);
@@ -74,6 +75,7 @@ public class Paint {
 		UndoButton.addActionListener(inv);
 		RedoButton.addActionListener(inv);
 		addTextButton.addActionListener(inv);
+		texte.addActionListener(new CounterTextListener(texte, drawing));
 	
 
 		
@@ -92,8 +94,6 @@ public class Paint {
 		buttonPanel.add(circleButton);
 		buttonPanel.add(rectangleButton);
 		
-		texte = new JTextField(drawing.getNumber());
-		texte.addActionListener(new CounterTextListener(texte, drawing));
 		infoPanel.add(counter);
 		infoPanel.add(texte);
 		

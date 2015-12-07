@@ -1,8 +1,11 @@
 package drawing;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import javax.swing.JPanel;
 /**
  * JPanel pouvant afficher des objets de type Shape
  */
@@ -10,17 +13,17 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 
 	private static final long serialVersionUID = 1L;
 	
-	ArrayList<Shape> shapes;
-	ArrayList<Shape> shapesSauv;	
-	int number;
-	boolean grouped;
-	boolean duplicate;
-	boolean duplicateGroup;
+	ArrayList<Shape> shapes; // Les formes
+	ArrayList<String> shapesText; // Les textes liés aux formes. 
+	int number; // Nombre de formes 
+	boolean grouped; // Groupé, utile pour les déplacement
+	boolean duplicate; // Dupliqué, utile pour dupliquer
 	
 	public Drawing(){
 		super();
 		number = 0;
 		shapes = new ArrayList<Shape>();
+		shapesText = new ArrayList<String>();
 		grouped = false;
 		duplicate = false;
 	}
@@ -37,6 +40,7 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	 */
 	public void addShape(Shape s){
 		shapes.add(s);
+		shapesText.add("");
 		number++;
 		this.repaint();
 	}
@@ -46,8 +50,12 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for(Shape s : shapes){
-			s.paint(g);
+		//for(Shape s : shapes){
+			//s.paint(g);
+		for(int i = 0; i< number; i++){
+			shapes.get(i).paint(g);
+			g.setColor(Color.BLACK);
+			g.drawString(shapesText.get(i), shapes.get(i).origin.x, shapes.get(i).origin.y);
 		}
 		
 	}
@@ -57,7 +65,6 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	 */
 	public void clear(){
 		number = 0;
-		shapesSauv = shapes;
 		shapes.clear();
 		this.repaint();
 	}
@@ -105,27 +112,15 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	
 	public void cloneShape(Shape s){
 		shapes.add(s.clone());
+		shapesText.add(shapesText.get(shapes.indexOf(s)));
 		number++;
 		this.repaint();
 	}
 	
-	public void unClear(){
-		number = shapesSauv.size();
-		shapes = shapesSauv;
-		shapesSauv.clear();
+	public void addText(String value, Shape s){
+		int i = shapes.indexOf(s);
+		shapesText.set(i, value); 
 		this.repaint();
-		
 	}
-	
-	public void unDuplicate(){
-		shapes.remove(number - 1);
-		number --;
-		duplicate = false;
-	}
-	
-	public void unCreate(){
-		shapes.remove(number - 1);
-		number --;
-		duplicate = false;
-	}
+
 }

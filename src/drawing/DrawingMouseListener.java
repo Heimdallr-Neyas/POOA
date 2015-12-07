@@ -27,7 +27,7 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 	 * Bouge la forme s�lectionn�e (si une forme est s�lectionn�e)
 	 */
 	public void mouseDragged(MouseEvent e) {
-		if(moveGroup == true && drawing.getGrouped() && !groupShapes.empty()){
+		if(moveGroup == true && drawing.getGrouped() && !groupShapes.empty() && groupShapes.contain(currentShape)){
 			Point x = e.getPoint();
 			x.x = x.x - currentShape.getPoint().x;
 			x.y = x.y - currentShape.getPoint().y;

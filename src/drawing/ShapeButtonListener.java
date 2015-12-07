@@ -1,3 +1,4 @@
+
 package drawing;
 
 import java.awt.Point;
@@ -13,6 +14,7 @@ public abstract class ShapeButtonListener implements CommandInterface, MouseList
 	Drawing drawing;
 	Point origin;
 	Point destination;
+	Boolean undo = false;
 	
 	public ShapeButtonListener(Drawing drawing){
 		this.drawing = drawing;
@@ -22,7 +24,14 @@ public abstract class ShapeButtonListener implements CommandInterface, MouseList
 	 * Ajouter un MouseListener pour le type de forme courant
 	 */
 	public void execute() {
-		drawing.addMouseListener(this);
+		if(!undo){
+			drawing.addMouseListener(this);
+			undo = true;
+		} else {
+			Shape s = createShape();
+			drawing.addShape(s);
+		}
+		
 	}
 	
 	/**

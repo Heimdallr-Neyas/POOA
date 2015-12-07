@@ -7,7 +7,6 @@ import java.util.Vector;
 public class Invoker implements ActionListener{
 	
 	Drawing _drawing;
-	CommandInterface c;
 	Vector<CommandInterface> _history;
 	int i;
 	
@@ -17,72 +16,53 @@ public class Invoker implements ActionListener{
 		i = 1;
 	}
 	
+	public void fct(CommandInterface c){
+		_history.addElement(c);
+		  i = 1; 
+		  c.execute();
+	}
+	
 	public void actionPerformed(ActionEvent arg0) {
 		
 		switch (arg0.getActionCommand()){
-		  case "Clear":
-			  System.out.println("78945600");
-			  c = new CommandClearButton(_drawing);
-			  System.out.println("741852963");
-			  _history.addElement(c);
-			  System.out.println("123456789");
-			  i = 1;
-			  System.out.println("123456789");
-			  c.execute();
+		  case "Clear":;
+			  fct(new CommandClearButton(_drawing));
+			  _history.clear();
 			  break;        
 		  case "Group":
-			  c = new CommandGroupButton(_drawing);
-			  _history.addElement(c);
-			  i = 1;
-			  c.execute();
+			  fct(new CommandGroupButton(_drawing));
 			  break; 
 		  case "Degroup":
-			  c = new CommandDegroupButton(_drawing);
-			  _history.addElement(c);
-			  i = 1;
-			  c.execute();
+			  fct(new CommandDegroupButton(_drawing));
 			  break; 
 		  case "Duplicate":
-			  c = new CommandDuplicateButton(_drawing);
-			  _history.addElement(c);
-			  i = 1;
-			  c.execute();
+			  fct(new CommandDuplicateButton(_drawing));
 			  break; 
 		  case "Circle":
-			  c = new CommandCircleButton(_drawing);
-			  _history.addElement(c);
-			  i = 1;
-			  c.execute();
+			  fct(new CommandCircleButton(_drawing));
 			  break;
 		  case "Rectangle":
-			  c = new CommandRectangleButton(_drawing);
-			  _history.addElement(c);
-			  i = 1;
-			  c.execute();
+			  fct(new CommandRectangleButton(_drawing));
 			  break; 
 		  case "add Text":
-			  c = new CommandAddTextButton(_drawing, "");
-			  _history.addElement(c);
-			  i = 1;
-			  c.execute();
+			  fct(new CommandAddTextButton(_drawing));
 			  break; 
 		  case "Undo":
-			  if(i > _history.size()){
-				  //i = 1;
-				  System.out.println("Plus rien à annuler ");
-			  }else{
-				  c = new CommandUndoButton(_drawing, _history.elementAt(_history.size() - i));
-				  i++;  
-				  c.execute();
-			  }
-			  break;
+			 if(i > _history.size()){
+			 } else {
+				  _drawing.clear();
+				 for(int k = 0; k < _history.size() - i; k ++){
+					 _history.elementAt(k).execute();
+				 }
+				 i++;				 
+			 }
+			 break;
 		  case "Redo":
-			  if(i <= 0){
-				  System.out.println("Plus rien à rejouer ");
-			  }else{
-				  c = new CommandRedoButton(_drawing, _history.elementAt(_history.size() - i));
-				  i--;				  
-				  c.execute();
+			  if(i <= 1){
+				  i = 1;
+			  } else {
+				  i--;
+				  _history.elementAt(_history.size() - i).execute();
 			  }
 			  break; 
 		  default: 

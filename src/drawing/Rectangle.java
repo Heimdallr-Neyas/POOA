@@ -22,24 +22,27 @@ public class Rectangle extends Shape {
 	}
 	
 	public Rectangle(Point origin, int width, int height, Color color){
-		this.origin = origin;
+		this.origin = new Point(origin.x + ( width / 2 ), origin.y + ( height / 2 ));
 		this.width = width;
 		this.height = height;
 		this.color = color;
 	}
 	
 	public boolean isOn(Point p) {
-		return(p.x > origin.x && p.x < origin.x+width && p.y > origin.y && p.y < origin.y+height);
+		return(p.x > origin.x-(width/2) && p.x < origin.x+(width/2) && p.y > origin.y-(height/2) && p.y < origin.y+(height/2));
 	}
 
 	public void paint(Graphics g) {
 		g.setColor(color);
-		g.fillRect(origin.x, origin.y, width, height);
+		g.fillRect(origin.x-(width/2), origin.y-(height/2), width, height);
 		g.setColor(Color.BLACK);
-		g.drawRect(origin.x, origin.y, width, height);
+		g.drawRect(origin.x-(width/2), origin.y-(height/2), width, height);
 	}
 	
 	public Shape clone(){
+		Point o = origin;
+		o.x = origin.x-(width/2);
+		o.y = origin.y-(height/2);
 		return new Rectangle(this.origin, this.width, this.height, this.color);
 	}
 }
